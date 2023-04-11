@@ -1,2 +1,2 @@
-# APLICACION
+# aplicacion
 Diseño de aplicacion.
