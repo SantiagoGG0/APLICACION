@@ -40,6 +40,18 @@ module.exports = (env, argv) => {
                             presets: ['@babel/preset-env']
                         },                        
                     }
+                },
+                {
+                    test: /\.(png|jpg|jpeg|gif|svg)$/,
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 8192,
+                                name: 'assets/img/[name].[ext]'
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -48,8 +60,16 @@ module.exports = (env, argv) => {
                 template: './src/index.html',
                 chunks: ['index', 'styles'],
             }),
-            // averiguar que significa un spread operator en JS.
-            ...(isProduction ? [new MiniCssExtractPlugin({ filename: 'assets/css/[name].[contenthash].css'})]: [])
+            // averiguar que significa un spread operator en JS.(Se usa para convertir un array en objetos particulares. Cada uno tiene su forma independiente.)
+            ...(isProduction ? [new MiniCssExtractPlugin({ filename: 'assets/css/[name].[contenthash].css'})]: []),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: './src/assets/img',
+                        to: 'assets/img'
+                    }
+                ]
+            })
         ],
         devServer: {
             static: {
