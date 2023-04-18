@@ -10,16 +10,52 @@
     <header class="my-3">
          <h1 class="text-center text-primary">APP</h1>
     </header>
+    
     <main class = "container">
+        
         <section class = "row text-center">
             <article class = "col-xs-12 col-md-6">
-                <img src="./assets/img/teachers.jpg" alt="Profesores.">
+                
+                <img class="img-fluid rounded" src="./assets/img/teachers.jpg" alt="Profesores.">
+            
             </article>
+           
             <article class = "col-xs-12 col-md-6">
-                Formulario
+               
+                <form class="form-floating" id ="teacherform">
+                    
+                    <div class="form-floating mb-3">
+                        <input type ="text" id = "txtName" name="txtName" class="form-control" placeholder="Ejm: Santiago" required></input>
+                        <label for="txtName">Nombre.</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea name="txtDescription" id="txtDescription" cols="30" rows="10" class="form-control" placeholder="@....com"></textarea>
+                        <label for="txtDescription">Descripción.</label>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type ="email" id = "txtEmail" name="txtEmail" class="form-control" ></input>
+                        <label for="txtEmail">Correo electrónico.</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type ="date" id = "txtBirthday" name="txtBirthday" class="form-control" placeholder="Ejm: 08/20/1912."></input>
+                        <label for="txtBirthday">Fecha de nacimiento.</label>
+                    </div>
+                    <div class ="row">
+                        <div class=" d-grid col-md-6">
+                            <button type="reset" id="btnCancel"class = "btn btn-secondary">Cancelar</button>
+                        </div>
+                        <div class="d-grid col-md-6">
+                            <button type = "submit" id="btnSubmit"class = "btn btn-success">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+                   
+                    
             </article>
         </section>
-        <section class = "row ">
+        
+        <section class = "row mt-3">
             <div class = "col-12">
                 <div class="table-responsive">
                 <table class="table table-hover table-bordered">
@@ -35,7 +71,7 @@
                                 Nombre.
                             </th>
                             <th scope ="col">
-                                Descripcion.
+                                Descripción.
                             </th>
                             <th scope ="col">
                                 Correo.
@@ -60,7 +96,7 @@
                                 Santiago Garcia
                             </td>
                             <td>
-                                Da clases de CEH en hardvard.
+                                Da clases de CEH en Harvard.
                             </td>
                             <td>
                                 whitlotus@gmail.com
@@ -85,7 +121,9 @@
         </section>  
     </main>
     <footer class ="text-center">
-        Derechos reservador por Santiago. <em class = 'fa-brands fa-apple'> </em>
+        Derechos reservados por Santiago. <em class = 'fa-brands fa-apple'> </em>
     </footer>
 </body>
 </html>
+
+
