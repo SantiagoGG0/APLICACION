@@ -21,10 +21,11 @@ export function getFormData() {
     return Object.fromEntries(formData.entries());
      */
     const teacher = {
-        name :formElements.fields.name.value,
-        description :formElements.fields.description.value,
-        email : formElements.fields.email.value,
-        birthday : formElements.fields.birthday.value,
-        };
-      return teacher;
+        id: new Date().getTime(),
+        name: formElements.fields.name.value,
+        description: formElements.fields.description.value,
+        email: formElements.fields.email.value,
+        birthday: formElements.fields.birthday.value,
+    };
+    return teacher;
 }
