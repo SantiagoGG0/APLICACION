@@ -1,8 +1,13 @@
 // Encargado de la interacción de javascript con html.
+// Third libraries.
 import alertify from 'alertifyjs';
 
-import { formElements, getFormData, resetForm } from './form'
+// Own libraries.
+import { validateForm } from './../utils/validations'
+// Module libraries.
+import { formElements, fieldConfigurations, getFormData, resetForm } from './form'
 import { createTeacher, readTeachers } from './repository';
+
 export function listeners() {
     window.addEventListener('load', () => {
         listenFormSubmitEvent();
@@ -13,10 +18,15 @@ export function listeners() {
 function listenFormSubmitEvent() {
     formElements.form.addEventListener('submit', (event) => {
         event.preventDefault();
-        createTeacher(getFormData());
-        resetForm();
-        alertify.success('Profesor guardado correctamente.');
-        listTeachers();
+        if (validateForm(fieldConfigurations)) {
+            createTeacher(getFormData());
+            resetForm();
+            alertify.success('Profesor guardado correctamente.');
+            listTeachers();
+        }
+        else {
+            alertify.error('Verificar los datos del formulario.')
+        }
     });
 }
 
@@ -91,4 +101,5 @@ function listTeachers() {
         colEmpty.classList.add('text-center');
         rowEmpty.appendChild(colEmpty);
         tbody.appendChild(rowEmpty);
-    }}
+    }
+}

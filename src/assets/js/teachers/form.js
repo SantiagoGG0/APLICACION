@@ -13,6 +13,45 @@ export const formElements = {
 
     }
 };
+/**
+ * Array de objetos que contiene información para las validaciones.
+ * Cada objeto tiene una referencia en cada campo, un array de objetos
+ * de validaciones que tendrá, el ID del error, el mensaje y la función de la validación.
+ */
+export const fieldConfigurations = [
+    {
+        input: formElements.fields.name,
+        validations: [
+            {
+
+                errorId: `${formElements.fields.name.id}Required`,
+                errorMessage: 'El nombre es obligatorio.',
+                // Las validaciones retornaran un False cuando debe mostrar el mensaje de error
+                // Y un True cuando no debe mostrar el mensaje de error.
+                validationFunction: (value) => {
+                    return value.trim() !== '';
+
+                    
+                }       
+            }
+        ]
+    },
+    {
+        input: formElements.fields.description,
+        validations: [
+            {
+
+                errorId: `${formElements.fields.description.id}Required`,
+                errorMessage: 'La descripción es obligatoria.',
+                validationFunction: (value) => {
+                    return value.trim() !== '';
+
+                    
+                }       
+            }
+        ]
+    }
+];
 
 export function getFormData() {
 
