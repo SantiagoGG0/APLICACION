@@ -3,7 +3,7 @@
 import alertify from 'alertifyjs';
 
 // Own libraries.
-import { validateForm } from './../utils/validations'
+import { validateForm, validateField, removeInputErrorMessage, removeErrorClassNameFields, removeErrorMessageElements } from './../utils/validations'
 // Module libraries.
 import { formElements, fieldConfigurations, getFormData, resetForm } from './form'
 import { createTeacher, readTeachers } from './repository';
@@ -12,17 +12,22 @@ export function listeners() {
     window.addEventListener('load', () => {
         listenFormSubmitEvent();
         listTeachers();
+        listenFormFieldsChangeEvent();
+        listenFormResetEvent();
     })
 }
 
 function listenFormSubmitEvent() {
     formElements.form.addEventListener('submit', (event) => {
         event.preventDefault();
+        alertify.dismissAll();
         if (validateForm(fieldConfigurations)) {
             createTeacher(getFormData());
             resetForm();
+            removeErrorClassNameFields('is-valid');
             alertify.success('Profesor guardado correctamente.');
             listTeachers();
+            listenFormFieldsChangeEvent();
         }
         else {
             alertify.error('Verificar los datos del formulario.')
@@ -102,4 +107,22 @@ function listTeachers() {
         rowEmpty.appendChild(colEmpty);
         tbody.appendChild(rowEmpty);
     }
+}
+function listenFormFieldsChangeEvent() {
+    fieldConfigurations.forEach(({ input, validations}) => {
+        input.addEventListener('change', () => {
+            removeInputErrorMessage(input);
+            
+            validations.forEach((validationConfig)=>{
+                validateField(input, validationConfig);
+            })
+        })
+    });
+}
+function listenFormResetEvent() {
+    formElements.form.addEventListener('reset', () => {
+        removeErrorMessageElements();
+        removeErrorClassNameFields('is-valid');
+        resetForm();
+    });
 }
