@@ -63,6 +63,14 @@ export const fieldConfigurations = [
 
                     
                 }       
+            },
+            {
+                errorId:`${formElements.fields.email.id}Pattern`,
+                errorMessage: "El correo electrónico no cumple con el formato correcto.",
+                validationFunction: (value) => {
+                    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
+                }
+                
             }
         ]
     },
@@ -78,7 +86,10 @@ export const fieldConfigurations = [
 
                     
                 }       
-            }
+            },
+            
+               
+            
         ]
     }
 ];
@@ -101,4 +112,13 @@ export function getFormData() {
 
 export function resetForm() {
     formElements.form.reset();
+}
+
+export function setFormData(teacher) {
+    const {id, name, description, email, birthday} = teacher;
+    formElements.fields.name.value = name;
+    formElements.fields.description.value = description;
+    formElements.fields.email.value = email;
+    formElements.fields.birthday.value = birthday;
+    
 }
